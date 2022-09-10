@@ -17,38 +17,6 @@ class Handler(
     val operatingSystemService: OperatingSystemService
 ) {
 
-    fun sayHello(rq: ServerRequest): Mono<ServerResponse> =
-        ServerResponse
-            .ok()
-//            .bodyValue("Hello world")
-//            .body(Mono.just("hello world"), String::class.java)
-//            .body(Mono.just(Student("choumy")) , Student::class.java)
-            .body(
-                Flux.just(Student("choumy"), Student("kimhab")),
-                Student::class.java
-            )
-
-    // path variable example
-    fun findStudentById(req: ServerRequest): Mono<ServerResponse> {
-        val name = req.pathVariable("name")
-        val age = req.pathVariable("age")
-        return ServerResponse.ok().body(Mono.just("$name + $age"), String::class.java)
-    }
-
-    // query params
-    fun search(req: ServerRequest): Mono<ServerResponse> {
-        val key = req.queryParam("name")
-        return ServerResponse.ok().body(Mono.just(key.get()), String::class.java)
-    }
-
-    // request body
-    fun createStudent(req: ServerRequest): Mono<ServerResponse> {
-        val studentRequestMono = req.bodyToMono(Student::class.java)
-
-        return ServerResponse.ok()
-            .body(studentRequestMono, Student::class.java)
-    }
-
     fun createOperatingSystem(req: ServerRequest): Mono<ServerResponse> {
         val osRequestMono = req.bodyToMono(OperatingSystemRequest::class.java)
 
