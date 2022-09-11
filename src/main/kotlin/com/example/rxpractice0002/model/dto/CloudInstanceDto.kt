@@ -6,7 +6,7 @@ data class CloudInstanceDto(
     val id: Long,
     val instanceName: String,
     val publicIpAddress: String,
-    var operatingSystem: OperatingSystemDto? = null,
-    var owner: AppUser? = null
+    var operatingSystem: OperatingSystemDto?,
+    var owner: AppUser?
 )
 
